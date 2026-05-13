@@ -9,14 +9,13 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
-
     }
 
     public void createUsersTable() {
         String sql = "CREATE TABLE IF NOT EXISTS users (" +
                 "id BIGSERIAL PRIMARY KEY, " +
-                "name  VARCHAR(50), "+
-                "lastName VARCHAR(50),  "+
+                "name  VARCHAR(100), "+
+                "lastName VARCHAR(100),  "+
                 "age SMALLINT)";
 
         try(Connection connection = Util.getConnection()){
@@ -31,6 +30,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable()  {
         String sql = "DROP TABLE IF EXISTS users";
+
         try (Connection connection = Util.getConnection();
          PreparedStatement statement = connection.prepareStatement(sql)){
             statement.executeUpdate();
@@ -42,6 +42,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         String sql = "INSERT INTO users (name, lastName, age) VALUES(?, ?, ?)";
+
         try(Connection connection = Util.getConnection();
             PreparedStatement st = connection.prepareStatement(sql)){
             st.setString(1, name);
@@ -55,7 +56,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        String sql= "DELETE FROM users WHERE id = ?";
+        String sql = "DELETE FROM users WHERE id =?";
+
         try(Connection connection = Util.getConnection();
         PreparedStatement st = connection.prepareStatement(sql)){
             st.setLong(1,id);
