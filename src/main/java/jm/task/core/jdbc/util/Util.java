@@ -33,6 +33,8 @@ public class Util {
         return connection;
     }
 
+
+    //Hibernate
     private static SessionFactory sessionFactory;
     static {
         Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
